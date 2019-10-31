@@ -1,0 +1,10 @@
+CREATE TABLE users(
+user_id SERIAL NOT NULL,
+user_name NCHAR(20) NOT NULL,
+user_email NCHAR(50) NOT NULL,
+user_password NCHAR(50) NOT NULL,
+user_address NCHAR(150) NOT NULL,
+user_coordinates NCHAR(25) NOT NULL,
+geom GEOMETRY(Point,4326),
+PRIMARY KEY (users_id)
+);
