@@ -27,6 +27,15 @@ element_description VARCHAR(15) NOT NULL,
 PRIMARY KEY(element_id)
 );
 
+INSERT INTO element
+VALUES
+(1, "estacionamento"),
+(2, "salva-vidas"),
+(3, "restaurante"),
+(4, "lojas"),
+(5, "quadras"),
+(6, "trilha");
+
 
 CREATE TABLE beach(
 beach_id INT AUTO_INCREMENT NOT NULL,
@@ -62,3 +71,6 @@ INDEX fk_users_idx(users_id),
 INDEX fk_beach_idx(beach_id),
 	CONSTRAINT fk_beach foreign key(beach_id) references beach(beach_id)
 );
+
+
+
