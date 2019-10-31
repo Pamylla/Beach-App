@@ -12,6 +12,14 @@ users_coordinates point NOT NULL,
 PRIMARY KEY (users_id)
 );
 
+insert into users
+values
+(null, "Pamylla Ostermann", "pamy@gmail.com", "1234", "Florianóplis", point(-27.540944, -48.503821)),
+(null, "Fanny Ciqueira", "fanny@gmail.com", "4321", "Florianóplis", point(-27.540944, -48.503821)),
+(null, "Felipe Damkiu", "felipe@gmail.com", "5678", "Florianóplis", point(-27.540944, -48.503821)),
+(null, "Artur Felix", "artur@gmail.com", "8765", "Florianóplis", point(-27.540944, -48.503821)),
+(null, "Carlos Darolt", "carlos@gmail.com", "9012", "Florianóplis", point(-27.540944, -48.503821)),
+(null, "Vanessa Coelho", "vanessa@gmail.com", "2109", "Florianóplis", point(-27.540944, -48.503821));
 
 CREATE TABLE element(
 element_id INT AUTO_INCREMENT NOT NULL,
