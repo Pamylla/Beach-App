@@ -1,0 +1,51 @@
+create database beachapp;
+
+use beachapp;
+
+CREATE TABLE user(
+user_id INT AUTO_INCREMENT NOT NULL,
+user_name varchar(20) NOT NULL,
+user_age INT,
+user_city VARCHAR(20) NOT NULL,
+user_state VARCHAR(20) NOT NULL,
+interesse_id INT,
+PRIMARY KEY(user_id),
+INDEX fk_interesse_idx(interesse_id),
+	CONSTRAINT fk_interesse foreign key(interesse_id) references interesse(interesse_id)
+);
+
+
+CREATE TABLE interesse(
+
+interesse_id INT AUTO_INCREMENT NOT NULL,
+interesse_descricao VARCHAR(15) NOT NULL,
+PRIMARY KEY(interesse_id)
+);
+
+
+CREATE TABLE praia(
+
+praia_id INT AUTO_INCREMENT NOT NULL,
+praia_name VARCHAR(20) NOT NULL,
+praia_coordinates VARCHAR(25) NOT NULL,
+praia_date DATE,
+praia_hour TIME,
+praia_condicao VARCHAR(10),
+praia_temperatura INT,
+praia_vento FLOAT(3,2),
+praia_ondulacao FLOAT(3,2),
+praia_precipitacao DECIMAL(10,2),
+praia_mare VARCHAR(10),
+praia_transito VARCHAR(10),
+elemento_id INT,
+PRIMARY KEY(praia_id),
+INDEX fk_elemento_idx(elemento_id),
+	CONSTRAINT fk_elemento foreign key(elemento_id) references elemento(elemento_id)
+);
+
+
+CREATE TABLE elemento(
+elemento_id INT AUTO_INCREMENT NOT NULL,
+elemento_descricao VARCHAR(15) NOT NULL,
+PRIMARY KEY(elemento_id)
+);
