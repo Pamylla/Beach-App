@@ -1,3 +1,7 @@
+create database beachguide;
+
+use beachguide;
+
 CREATE TABLE users(
 users_id SERIAL NOT NULL,
 users_name NCHAR(20) NOT NULL,
@@ -13,4 +17,40 @@ CREATE TABLE element(
 element_id INT AUTO_INCREMENT NOT NULL,
 element_description VARCHAR(15) NOT NULL,
 PRIMARY KEY(element_id)
+);
+
+
+CREATE TABLE beach(
+beach_id INT AUTO_INCREMENT NOT NULL,
+beach_name VARCHAR(20) NOT NULL,
+beach_adress VARCHAR(25) NOT NULL,
+beach_coordinates VARCHAR(25) NOT NULL,
+element_id INT,
+PRIMARY KEY(beach_id),
+INDEX fk_element_idx(element_id),
+	CONSTRAINT fk_element foreign key(element_id) references element(element_id)
+);
+
+
+CREATE TABLE report(
+report_id INT AUTO_INCREMENT NOT NULL,
+report_date DATE NOT NULL,
+report_hour TIME NOT NULL,
+report_condition BOOLEAN NOT NULL,
+report_temperature INT NOT NULL,
+report_windIntensity INT NOT NULL,
+report_windDirection VARCHAR(10) NOT NULL,
+report_waveSize INT NOT NULL,
+report_waveDirection VARCHAR(10) NOT NULL, 
+report_rain BOOLEAN NOT NULL,
+report_tide VARCHAR(10),
+report_traffic INT NOT NULL,
+report_picture VARCHAR(200) NOT NULL,
+users_id INT,
+beach_id INT,
+PRIMARY KEY(report_id),
+INDEX fk_users_idx(users_id),
+	CONSTRAINT fk_users foreign key(users_id) references users(users_id),
+INDEX fk_beach_idx(beach_id),
+	CONSTRAINT fk_beach foreign key(beach_id) references beach(beach_id)
 );
