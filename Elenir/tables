@@ -3,12 +3,12 @@ create database beachguide;
 use beachguide;
 
 CREATE TABLE users(
-users_id INT AUTO_INCREMENT NOT NULL,
-users_name VARCHAR(20) NOT NULL,
-users_email VARCHAR(50) NOT NULL,
-users_password VARCHAR(50) NOT NULL,
-users_address VARCHAR(150) NOT NULL,
-users_coordinates VARCHAR(25) NOT NULL,
+users_id SERIAL NOT NULL,
+users_name NCHAR(20) NOT NULL,
+users_email NCHAR(50) NOT NULL,
+users_password NCHAR(50) NOT NULL,
+users_address NCHAR(150) NOT NULL,
+users_coordinates point NOT NULL,
 PRIMARY KEY (users_id)
 );
 
