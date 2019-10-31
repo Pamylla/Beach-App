@@ -48,6 +48,15 @@ INDEX fk_element_idx(element_id),
 	CONSTRAINT fk_element foreign key(element_id) references element(element_id)
 );
 
+insert into beach
+values
+(null, "Joaquina", "Leste", point(-27.540944, -48.503821), 1),
+(null, "Canasvieira", "Norte", point(-27.540944, -48.503821), 3),
+(null, "Lagoinha do Leste", "Leste", point(-27.540944, -48.503821), 6),
+(null, "Matadeiro", "Sul", point(-27.540944, -48.503821), 2),
+(null, "Ingleses", "Norte", point(-27.540944, -48.503821), 2),
+(null, "Campeche", "Leste", point(-27.540944, -48.503821), 2);
+
 
 CREATE TABLE report(
 report_id INT AUTO_INCREMENT NOT NULL,
