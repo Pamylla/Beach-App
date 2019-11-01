@@ -135,3 +135,68 @@ where report_date  = "2019-05-01";
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Selecionar ID, temperatura e trânsito dos reports que a condição da praia no dia for boa ("true")*/
+
+select report_id, report_temperature, report_traffic from report
+where report_condition =  1;
+
+
+/*Selecionar ID, data e condição da chuva dos reports do mês de agosto e setembro*/
+
+select report_id, report_date, report_rain from report
+where report_date between "2019-08-01" and "2019-09-30"; 
+
+
+/*Selecionar o ID e o nome das praias do Leste que terminam com a letra "e" */
+
+select beach_id, beach_name from beach
+where beach_adress = "Leste" and beach_name like "%e%";
+
+
+/*Selecionar nome das praias que tem salva-vidas e estacionamento*/
+
+select beach_name 
+from beach, element
+where element_id 
+
+
+
+
+
+.
+.
+.
+
+
+ select vendas.nomeven,
+    -> produto.descpro,
+    -> categoria.codcat
+    -> from vendas, produto, categoria
+    -> where vendas.codpro = produto.codpro and
+    -> vendas.codcat = categoria.codcat;
+
