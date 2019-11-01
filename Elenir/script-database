@@ -41,7 +41,7 @@ CREATE TABLE beach(
 beach_id INT AUTO_INCREMENT NOT NULL,
 beach_name VARCHAR(20) NOT NULL,
 beach_adress VARCHAR(25) NOT NULL,
-beach_coordinates VARCHAR(25) NOT NULL,
+beach_coordinates point NOT NULL,
 element_id INT,
 PRIMARY KEY(beach_id),
 INDEX fk_element_idx(element_id),
