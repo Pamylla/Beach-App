@@ -25,6 +25,10 @@ UPDATE users
 SET users_email = "pamylla@gmail.com"
 WHERE users_email = "pamy@gmail.com";
 
+Delete from users
+where users_name = "Vanessa Coelho";
+
+
 CREATE TABLE element(
 element_id INT AUTO_INCREMENT NOT NULL,
 element_description VARCHAR(15) NOT NULL,
@@ -44,6 +48,10 @@ UPDATE element
 SET element_description = "quadras esport"
 WHERE element_description = "quadras";
 
+Delete from element
+where element_description = "lojas";
+
+
 CREATE TABLE beach(
 beach_id INT AUTO_INCREMENT NOT NULL,
 beach_name VARCHAR(20) NOT NULL,
@@ -55,10 +63,6 @@ INDEX fk_element_idx(element_id),
 	CONSTRAINT fk_element foreign key(element_id) references element(element_id)
 );
 
-UPDATE beach
-SET beach_coordinates = point(-27.540944, -48.50382122222)
-WHERE beach_coordinates = point(-27.540944, -48.503821);
-
 insert into beach
 values
 (null, "Joaquina", "Leste", point(-27.540944, -48.503821), 1),
@@ -67,6 +71,13 @@ values
 (null, "Matadeiro", "Sul", point(-27.540944, -48.503821), 2),
 (null, "Ingleses", "Norte", point(-27.540944, -48.503821), 2),
 (null, "Campeche", "Leste", point(-27.540944, -48.503821), 2);
+
+UPDATE beach
+SET beach_coordinates = point(-27.540944, -48.50382122222)
+WHERE beach_coordinates = point(-27.540944, -48.503821);
+
+Delete from beach
+where beach_name = "Matadeiro";
 
 
 CREATE TABLE report(
@@ -118,5 +129,9 @@ VALUES
 UPDATE report
 SET report_picture = "photo111111.jpg"
 WHERE report_picture = "photo1.jpg";
+
+Delete from report
+where report_date  = "2019-05-01";
+
 
 
