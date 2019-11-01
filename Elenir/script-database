@@ -21,6 +21,10 @@ values
 (null, "Carlos Darolt", "carlos@gmail.com", "9012", "Florianóplis", point(-27.540944, -48.503821)),
 (null, "Vanessa Coelho", "vanessa@gmail.com", "2109", "Florianóplis", point(-27.540944, -48.503821));
 
+UPDATE users
+SET users_email = "pamylla@gmail.com"
+WHERE users_email = "pamy@gmail.com";
+
 CREATE TABLE element(
 element_id INT AUTO_INCREMENT NOT NULL,
 element_description VARCHAR(15) NOT NULL,
@@ -36,6 +40,9 @@ VALUES
 (5, "quadras"),
 (6, "trilha");
 
+UPDATE element
+SET element_description = "quadras esport"
+WHERE element_description = "quadras";
 
 CREATE TABLE beach(
 beach_id INT AUTO_INCREMENT NOT NULL,
@@ -47,6 +54,10 @@ PRIMARY KEY(beach_id),
 INDEX fk_element_idx(element_id),
 	CONSTRAINT fk_element foreign key(element_id) references element(element_id)
 );
+
+UPDATE beach
+SET beach_coordinates = point(-27.540944, -48.50382122222)
+WHERE beach_coordinates = point(-27.540944, -48.503821);
 
 insert into beach
 values
