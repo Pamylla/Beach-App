@@ -92,5 +92,29 @@ INDEX fk_beach_idx(beach_id),
 	CONSTRAINT fk_beach foreign key(beach_id) references beach(beach_id)
 );
 
+INSERT INTO report
+VALUES
+(null, "2019-05-01", "14:35", true, 37, 4, "Norte", 2, "Leste", false, "seca", 3, "photo1.jpg", 1, 4),
+(null, "2019-06-20", "07:10", true, 23, 2, "Sul", 2, "Nordeste", false, "cheia", 1, "photo2.jpg", 2, 5),
+(null, "2019-06-22", "12:22", false, 19, 8, "Nordeste", 9, "Sudeste", true, "cheia", 8, "photo3.jpg", 3, 6),
+(null, "2019-06-30", "09:12", true, 23, 1, "Sul", 4, "Nordeste", false, "cheia", 7, "photo4.jpg", 4, 1),
+(null, "2019-07-02", "16:07", true, 22, 3, "Sul", 1, "Sul", false, "cheia", 7, "photo5.jpg", 5, 2),
+(null, "2019-07-07", "13:47", true, 30, 5, "Sudoeste", 4, "Sudeste", false, "seca", 3, "photo6.jpg", 6, 3),
+(null, "2019-07-11", "14:35", false, 37, 4, "Norte", 8, "Leste", false, "seca", 3, "photo7.jpg", 4, 1),
+(null, "2019-07-22", "08:30", true, 29, 3, "Sudoeste", 4, "Sul", true, "seca", 2, "photo8.jpg", 1, 4),
+(null, "2019-07-29", "14:29", false, 15, 9, "Nordeste", 6, "Sul", true, "cheia", 8, "photo9.jpg", 3, 2),
+(null, "2019-08-04", "10:02", false, 30, 10, "Oeste", 2, "Leste", false, "cheia", 8, "photo10.jpg", 5, 1),
+(null, "2019-08-11", "05:12", true, 37, 4, "Noroeste", 2, "Sudoeste", false, "seca", 4, "photo11.jpg", 3, 5),
+(null, "2019-08-12", "16:07", false, 25, 3, "Sul", 2, "Sul", false, "cheia", 10, "photo12.jpg", 5, 6),
+(null, "2019-08-23", "14:35", true, 29, 4, "Norte", 2, "Leste", false, "seca", 3, "photo13.jpg", 2, 4),
+(null, "2019-09-01", "15:50", true, 22, 3, "Sudeste", 2, "Sul", false, "cheia", 7, "photo14.jpg", 5, 3),
+(null, "2019-09-03", "07:14", false, 23, 1, "Leste", 1, "Nordeste", false, "cheia", 3, "photo15.jpg", 1, 2),
+(null, "2019-09-14", "09:44", true, 29, 5, "Oeste", 6, "Sul", false, "cheia", 4, "photo16.jpg", 3, 6),
+(null, "2019-09-19", "06:28", false, 24, 5, "Nordeste", 3, "Sudeste", true, "cheia", 8, "photo17.jpg", 6, 1),
+(null, "2019-10-01", "10:35", true, 37, 4, "Norte", 2, "Leste", false, "seca", 3, "photo18.jpg", 3, 5),
+(null, "2019-10-12", "11:34", true, 28, 7, "Sul", 6, "Nordeste", false, "cheia", 5, "photo19.jpg", 4, 1),
+(null, "2019-10-30", "09:23", false, 23, 1, "Oeste", 2, "Leste", false, "cheia", 4, "photo20.jpg", 5, 4);
+
+
 
 
