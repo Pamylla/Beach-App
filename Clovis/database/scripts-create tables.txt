@@ -1,0 +1,36 @@
+Floripa Beach Guide
+
+CREATE TABLE users(
+user_id SERIAL NOT NULL,
+user_name NCHAR(20) NOT NULL,
+user_email NCHAR(50) NOT NULL,
+user_password NCHAR(50) NOT NULL,
+user_address NCHAR(150) NOT NULL,
+user_coordinates NCHAR(25) NOT NULL,
+geom GEOMETRY(Point,4326),
+PRIMARY KEY (user_id)
+);
+
+
+CREATE TABLE report(
+user_id INT NOT NULL,
+beach_id SERIAL NOT NULL,
+beach_name VARCHAR(20) NOT NULL,
+report_address NCHAR(150) NOT NULL,
+report_coordinates NCHAR(25) NOT NULL,
+geom GEOMETRY(Point,4326),
+report_date DATE,
+report_hour TIME,
+report_condition BOOLEAN NOT NULL,
+report_temperature INT NOT NULL,
+report_windIntensity INT NOT NULL,
+report_windDirection NCHAR(10) NOT NULL,
+report_waveSize INT NOT NULL,
+report_waveDirection NCHAR(10) NOT NULL, 
+report_rain BOOLEAN NOT NULL,
+report_tide VARCHAR(10),
+report_traffic INT NOT NULL,
+report_picture BYTEA NOT NULL,
+PRIMARY KEY(beach_id),
+FOREIGN KEY (user_id) REFERENCES users (user_id)
+);
