@@ -1,0 +1,418 @@
+mysql> create database beachguide;
+Query OK, 1 row affected (0.17 sec)
+
+mysql>
+mysql> use beachguide;
+Database changed
+mysql>
+mysql> CREATE TABLE users(
+    -> users_id INT AUTO_INCREMENT NOT NULL,
+    -> users_name NCHAR(20) NOT NULL,
+    -> users_email NCHAR(50) NOT NULL,
+    -> users_password NCHAR(50) NOT NULL,
+    -> users_address NCHAR(150) NOT NULL,
+    -> users_coordinates point NOT NULL,
+    -> PRIMARY KEY (users_id)
+    -> );
+Query OK, 0 rows affected, 4 warnings (0.31 sec)
+
+mysql>
+mysql> insert into users
+    -> values
+    -> (null, "Pamylla Ostermann", "pamy@gmail.com", "1234", "Florianóplis", point(-27.540944, -48.503821)),
+    -> (null, "Fanny Ciqueira", "fanny@gmail.com", "4321", "Florianóplis", point(-27.540944, -48.503821)),
+    -> (null, "Felipe Damkiu", "felipe@gmail.com", "5678", "Florianóplis", point(-27.540944, -48.503821)),
+    -> (null, "Artur Felix", "artur@gmail.com", "8765", "Florianóplis", point(-27.540944, -48.503821)),
+    -> (null, "Carlos Darolt", "carlos@gmail.com", "9012", "Florianóplis", point(-27.540944, -48.503821)),
+    -> (null, "Vanessa Coelho", "vanessa@gmail.com", "2109", "Florianóplis", point(-27.540944, -48.503821));
+Query OK, 6 rows affected (0.13 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from users;
++----------+-------------------+-------------------+----------------+---------------+---------------------------+
+| users_id | users_name        | users_email       | users_password | users_address | users_coordinates         |
++----------+-------------------+-------------------+----------------+---------------+---------------------------+
+|        1 | Pamylla Ostermann | pamy@gmail.com    | 1234           | Florianóplis  |        ©÷TN{;ÀÞß4}@HÀ        |
+|        2 | Fanny Ciqueira    | fanny@gmail.com   | 4321           | Florianóplis  |        ©÷TN{;ÀÞß4}@HÀ        |
+|        3 | Felipe Damkiu     | felipe@gmail.com  | 5678           | Florianóplis  |        ©÷TN{;ÀÞß4}@HÀ        |
+|        4 | Artur Felix       | artur@gmail.com   | 8765           | Florianóplis  |        ©÷TN{;ÀÞß4}@HÀ        |
+|        5 | Carlos Darolt     | carlos@gmail.com  | 9012           | Florianóplis  |        ©÷TN{;ÀÞß4}@HÀ        |
+|        6 | Vanessa Coelho    | vanessa@gmail.com | 2109           | Florianóplis  |        ©÷TN{;ÀÞß4}@HÀ        |
++----------+-------------------+-------------------+----------------+---------------+---------------------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE users
+    -> SET users_email = "pamylla@gmail.com"
+    -> WHERE users_email = "pamy@gmail.com";
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>
+mysql> Delete from users
+    -> where users_name = "Vanessa Coelho";
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from users;
++----------+-------------------+-------------------+----------------+---------------+---------------------------+
+| users_id | users_name        | users_email       | users_password | users_address | users_coordinates         |
++----------+-------------------+-------------------+----------------+---------------+---------------------------+
+|        1 | Pamylla Ostermann | pamylla@gmail.com | 1234           | Florianóplis  |        ©÷TN{;ÀÞß4}@HÀ        |
+|        2 | Fanny Ciqueira    | fanny@gmail.com   | 4321           | Florianóplis  |        ©÷TN{;ÀÞß4}@HÀ        |
+|        3 | Felipe Damkiu     | felipe@gmail.com  | 5678           | Florianóplis  |        ©÷TN{;ÀÞß4}@HÀ        |
+|        4 | Artur Felix       | artur@gmail.com   | 8765           | Florianóplis  |        ©÷TN{;ÀÞß4}@HÀ        |
+|        5 | Carlos Darolt     | carlos@gmail.com  | 9012           | Florianóplis  |        ©÷TN{;ÀÞß4}@HÀ        |
++----------+-------------------+-------------------+----------------+---------------+---------------------------+
+5 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+mysql> CREATE TABLE element(
+    -> element_id INT AUTO_INCREMENT NOT NULL,
+    -> element_description VARCHAR(15) NOT NULL,
+    -> PRIMARY KEY(element_id)
+    -> );
+Query OK, 0 rows affected (0.35 sec)
+
+
+mysql> INSERT INTO element
+    -> VALUES
+    -> (1, "estacionamento"),
+    -> (2, "salva-vidas"),
+    -> (3, "restaurante"),
+    -> (4, "lojas"),
+    -> (5, "quadras"),
+    -> (6, "trilha");
+Query OK, 6 rows affected (0.11 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+
+mysql> UPDATE element
+    -> SET element_description = "quadras esport"
+    -> WHERE element_description = "quadras";
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+mysql>
+mysql> Delete from element
+    -> where element_description = "lojas";
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from element;
++------------+---------------------+
+| element_id | element_description |
++------------+---------------------+
+|          1 | estacionamento      |
+|          2 | salva-vidas         |
+|          3 | restaurante         |
+|          5 | quadras esport      |
+|          6 | trilha              |
++------------+---------------------+
+5 rows in set (0.00 sec)
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+mysql> CREATE TABLE beach(
+    -> beach_id INT AUTO_INCREMENT NOT NULL,
+    -> beach_name VARCHAR(20) NOT NULL,
+    -> beach_adress VARCHAR(25) NOT NULL,
+    -> beach_coordinates point NOT NULL,
+    -> element_id INT,
+    -> PRIMARY KEY(beach_id),
+    -> INDEX fk_element_idx(element_id),
+    -> CONSTRAINT fk_element foreign key(element_id) references element(element_id)
+    -> );
+Query OK, 0 rows affected (0.65 sec)
+
+mysql>
+mysql> insert into beach
+    -> values
+    -> (null, "Joaquina", "Leste", point(-27.540944, -48.503821), 1),
+    -> (null, "Canasvieira", "Norte", point(-27.540944, -48.503821), 3),
+    -> (null, "Lagoinha do Leste", "Leste", point(-27.540944, -48.503821), 6),
+    -> (null, "Matadeiro", "Sul", point(-27.540944, -48.503821), 2),
+    -> (null, "Ingleses", "Norte", point(-27.540944, -48.503821), 2),
+    -> (null, "Campeche", "Leste", point(-27.540944, -48.503821), 2);
+Query OK, 6 rows affected (0.11 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+
+
+mysql> select * from beach;
++----------+-------------------+--------------+---------------------------+------------+
+| beach_id | beach_name        | beach_adress | beach_coordinates         | element_id |
++----------+-------------------+--------------+---------------------------+------------+
+|        1 | Joaquina          | Leste        |        ©÷TN{;ÀÞß4}@HÀ        |          1 |
+|        2 | Canasvieira       | Norte        |        ©÷TN{;ÀÞß4}@HÀ        |          3 |
+|        3 | Lagoinha do Leste | Leste        |        ©÷TN{;ÀÞß4}@HÀ        |          6 |
+|        4 | Matadeiro         | Sul          |        ©÷TN{;ÀÞß4}@HÀ        |          2 |
+|        5 | Ingleses          | Norte        |        ©÷TN{;ÀÞß4}@HÀ        |          2 |
+|        6 | Campeche          | Leste        |        ©÷TN{;ÀÞß4}@HÀ        |          2 |
++----------+-------------------+--------------+---------------------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE beach
+    -> SET beach_coordinates = point(-27.540944, -48.50382122222)
+    -> WHERE beach_coordinates = point(-27.540944, -48.503821);
+Query OK, 6 rows affected (0.07 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+
+mysql> Delete from beach
+    -> where beach_name = "Matadeiro";
+Query OK, 1 row affected (0.04 sec)
+
+
+mysql> select * from beach;
++----------+-------------------+--------------+---------------------------+------------+
+| beach_id | beach_name        | beach_adress | beach_coordinates         | element_id |
++----------+-------------------+--------------+---------------------------+------------+
+|        1 | Joaquina          | Leste        |        ©÷TN{;À;¼6}@HÀ        |          1 |
+|        2 | Canasvieira       | Norte        |        ©÷TN{;À;¼6}@HÀ        |          3 |
+|        3 | Lagoinha do Leste | Leste        |        ©÷TN{;À;¼6}@HÀ        |          6 |
+|        5 | Ingleses          | Norte        |        ©÷TN{;À;¼6}@HÀ        |          2 |
+|        6 | Campeche          | Leste        |        ©÷TN{;À;¼6}@HÀ        |          2 |
++----------+-------------------+--------------+---------------------------+------------+
+5 rows in set (0.00 sec)
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+mysql> CREATE TABLE report(
+    -> report_id INT AUTO_INCREMENT NOT NULL,
+    -> report_date DATE NOT NULL,
+    -> report_hour TIME NOT NULL,
+    -> report_condition BOOLEAN NOT NULL,
+    -> report_temperature INT NOT NULL,
+    -> report_windIntensity INT NOT NULL,
+    -> report_windDirection VARCHAR(10) NOT NULL,
+    -> report_waveSize INT NOT NULL,
+    -> report_waveDirection VARCHAR(10) NOT NULL,
+    -> report_rain BOOLEAN NOT NULL,
+    -> report_tide VARCHAR(10),
+    -> report_traffic INT NOT NULL,
+    -> report_picture VARCHAR(200) NOT NULL,
+    -> users_id INT,
+    -> beach_id INT,
+    -> PRIMARY KEY(report_id),
+    -> INDEX fk_users_idx(users_id),
+    -> CONSTRAINT fk_users foreign key(users_id) references users(users_id),
+    -> INDEX fk_beach_idx(beach_id),
+    -> CONSTRAINT fk_beach foreign key(beach_id) references beach(beach_id)
+    -> );
+Query OK, 0 rows affected (0.42 sec)
+
+
+mysql> INSERT INTO report
+    -> VALUES
+    -> (null, "2019-05-01", "14:35", true, 37, 4, "Norte", 2, "Leste", false, "seca", 3, "photo1.jpg", 1, 3),
+    -> (null, "2019-06-20", "07:10", true, 23, 2, "Sul", 2, "Nordeste", false, "cheia", 1, "photo2.jpg", 2, 5),
+    -> (null, "2019-06-22", "12:22", false, 19, 8, "Nordeste", 9, "Sudeste", true, "cheia", 8, "photo3.jpg", 3, 6),
+    -> (null, "2019-06-30", "09:12", true, 23, 1, "Sul", 3, "Nordeste", false, "cheia", 7, "photo4.jpg", 4, 1),
+    -> (null, "2019-07-02", "16:07", true, 22, 3, "Sul", 1, "Sul", false, "cheia", 7, "photo5.jpg", 4, 2),
+    -> (null, "2019-07-07", "13:47", true, 30, 5, "Sudoeste", 3, "Sudeste", false, "seca", 3, "photo6.jpg", 2, 3),
+    -> (null, "2019-07-11", "14:35", false, 37, 4, "Norte", 8, "Leste", false, "seca", 3, "photo7.jpg", 4, 1),
+    -> (null, "2019-07-22", "08:30", true, 29, 3, "Sudoeste", 4, "Sul", true, "seca", 2, "photo8.jpg", 1, 3),
+    -> (null, "2019-07-29", "14:29", false, 15, 9, "Nordeste", 6, "Sul", true, "cheia", 8, "photo9.jpg", 3, 2),
+    -> (null, "2019-08-04", "10:02", false, 30, 10, "Oeste", 2, "Leste", false, "cheia", 8, "photo10.jpg", 5, 1),
+    -> (null, "2019-08-11", "05:12", true, 37, 4, "Noroeste", 2, "Sudoeste", false, "seca", 4, "photo11.jpg", 3, 5),
+    -> (null, "2019-08-12", "16:07", false, 25, 3, "Sul", 2, "Sul", false, "cheia", 10, "photo12.jpg", 5, 6),
+    -> (null, "2019-08-23", "14:35", true, 29, 4, "Norte", 2, "Leste", false, "seca", 3, "photo13.jpg", 2, 3),
+    -> (null, "2019-09-01", "15:50", true, 22, 3, "Sudeste", 2, "Sul", false, "cheia", 7, "photo14.jpg", 5, 3),
+    -> (null, "2019-09-03", "07:14", false, 23, 1, "Leste", 1, "Nordeste", false, "cheia", 3, "photo15.jpg", 1, 2),
+    -> (null, "2019-09-14", "09:44", true, 29, 5, "Oeste", 6, "Sul", false, "cheia", 4, "photo16.jpg", 3, 6),
+    -> (null, "2019-09-19", "06:28", false, 24, 5, "Nordeste", 3, "Sudeste", true, "cheia", 8, "photo17.jpg", 4, 1),
+    -> (null, "2019-10-01", "10:35", true, 37, 4, "Norte", 2, "Leste", false, "seca", 3, "photo18.jpg", 3, 5),
+    -> (null, "2019-10-12", "11:34", true, 28, 7, "Sul", 6, "Nordeste", false, "cheia", 5, "photo19.jpg", 4, 1),
+    -> (null, "2019-10-30", "09:23", false, 23, 1, "Oeste", 2, "Leste", false, "cheia", 4, "photo20.jpg", 5, 3);
+Query OK, 20 rows affected (0.07 sec)
+Records: 20  Duplicates: 0  Warnings: 0
+
+mysql> select* from report;
++-----------+-------------+-------------+------------------+--------------------+----------------------+----------------------+-----------------+----------------------+-------------+-------------+----------------+----------------+----------+----------+
+| report_id | report_date | report_hour | report_condition | report_temperature | report_windIntensity | report_windDirection | report_waveSize | report_waveDirection | report_rain | report_tide | report_traffic | report_picture | users_id | beach_id |
++-----------+-------------+-------------+------------------+--------------------+----------------------+----------------------+-----------------+----------------------+-------------+-------------+----------------+----------------+----------+----------+
+|        61 | 2019-05-01  | 14:35:00    |                1 |                 37 |                    4 | Norte                |               2 | Leste                |           0 | seca        |              3 | photo1.jpg     |        1 |        3 |
+|        62 | 2019-06-20  | 07:10:00    |                1 |                 23 |                    2 | Sul                  |               2 | Nordeste             |           0 | cheia       |              1 | photo2.jpg     |        2 |        5 |
+|        63 | 2019-06-22  | 12:22:00    |                0 |                 19 |                    8 | Nordeste             |               9 | Sudeste              |           1 | cheia       |              8 | photo3.jpg     |        3 |        6 |
+|        64 | 2019-06-30  | 09:12:00    |                1 |                 23 |                    1 | Sul                  |               3 | Nordeste             |           0 | cheia       |              7 | photo4.jpg     |        4 |        1 |
+|        65 | 2019-07-02  | 16:07:00    |                1 |                 22 |                    3 | Sul                  |               1 | Sul                  |           0 | cheia       |              7 | photo5.jpg     |        4 |        2 |
+|        66 | 2019-07-07  | 13:47:00    |                1 |                 30 |                    5 | Sudoeste             |               3 | Sudeste              |           0 | seca        |              3 | photo6.jpg     |        2 |        3 |
+|        67 | 2019-07-11  | 14:35:00    |                0 |                 37 |                    4 | Norte                |               8 | Leste                |           0 | seca        |              3 | photo7.jpg     |        4 |        1 |
+|        68 | 2019-07-22  | 08:30:00    |                1 |                 29 |                    3 | Sudoeste             |               4 | Sul                  |           1 | seca        |              2 | photo8.jpg     |        1 |        3 |
+|        69 | 2019-07-29  | 14:29:00    |                0 |                 15 |                    9 | Nordeste             |               6 | Sul                  |           1 | cheia       |              8 | photo9.jpg     |        3 |        2 |
+|        70 | 2019-08-04  | 10:02:00    |                0 |                 30 |                   10 | Oeste                |               2 | Leste                |           0 | cheia       |              8 | photo10.jpg    |        5 |        1 |
+|        71 | 2019-08-11  | 05:12:00    |                1 |                 37 |                    4 | Noroeste             |               2 | Sudoeste             |           0 | seca        |              4 | photo11.jpg    |        3 |        5 |
+|        72 | 2019-08-12  | 16:07:00    |                0 |                 25 |                    3 | Sul                  |               2 | Sul                  |           0 | cheia       |             10 | photo12.jpg    |        5 |        6 |
+|        73 | 2019-08-23  | 14:35:00    |                1 |                 29 |                    4 | Norte                |               2 | Leste                |           0 | seca        |              3 | photo13.jpg    |        2 |        3 |
+|        74 | 2019-09-01  | 15:50:00    |                1 |                 22 |                    3 | Sudeste              |               2 | Sul                  |           0 | cheia       |              7 | photo14.jpg    |        5 |        3 |
+|        75 | 2019-09-03  | 07:14:00    |                0 |                 23 |                    1 | Leste                |               1 | Nordeste             |           0 | cheia       |              3 | photo15.jpg    |        1 |        2 |
+|        76 | 2019-09-14  | 09:44:00    |                1 |                 29 |                    5 | Oeste                |               6 | Sul                  |           0 | cheia       |              4 | photo16.jpg    |        3 |        6 |
+|        77 | 2019-09-19  | 06:28:00    |                0 |                 24 |                    5 | Nordeste             |               3 | Sudeste              |           1 | cheia       |              8 | photo17.jpg    |        4 |        1 |
+|        78 | 2019-10-01  | 10:35:00    |                1 |                 37 |                    4 | Norte                |               2 | Leste                |           0 | seca        |              3 | photo18.jpg    |        3 |        5 |
+|        79 | 2019-10-12  | 11:34:00    |                1 |                 28 |                    7 | Sul                  |               6 | Nordeste             |           0 | cheia       |              5 | photo19.jpg    |        4 |        1 |
+|        80 | 2019-10-30  | 09:23:00    |                0 |                 23 |                    1 | Oeste                |               2 | Leste                |           0 | cheia       |              4 | photo20.jpg    |        5 |        3 |
++-----------+-------------+-------------+------------------+--------------------+----------------------+----------------------+-----------------+----------------------+-------------+-------------+----------------+----------------+----------+----------+
+20 rows in set (0.00 sec)
+
+mysql> UPDATE report
+    -> SET report_picture = "photo111111.jpg"
+    -> WHERE report_picture = "photo1.jpg";
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>
+mysql> Delete from report
+    -> where report_date  = "2019-05-01";
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select* from report;
++-----------+-------------+-------------+------------------+--------------------+----------------------+----------------------+-----------------+----------------------+-------------+-------------+----------------+----------------+----------+----------+
+| report_id | report_date | report_hour | report_condition | report_temperature | report_windIntensity | report_windDirection | report_waveSize | report_waveDirection | report_rain | report_tide | report_traffic | report_picture | users_id | beach_id |
++-----------+-------------+-------------+------------------+--------------------+----------------------+----------------------+-----------------+----------------------+-------------+-------------+----------------+----------------+----------+----------+
+|        62 | 2019-06-20  | 07:10:00    |                1 |                 23 |                    2 | Sul                  |               2 | Nordeste             |           0 | cheia       |              1 | photo2.jpg     |        2 |        5 |
+|        63 | 2019-06-22  | 12:22:00    |                0 |                 19 |                    8 | Nordeste             |               9 | Sudeste              |           1 | cheia       |              8 | photo3.jpg     |        3 |        6 |
+|        64 | 2019-06-30  | 09:12:00    |                1 |                 23 |                    1 | Sul                  |               3 | Nordeste             |           0 | cheia       |              7 | photo4.jpg     |        4 |        1 |
+|        65 | 2019-07-02  | 16:07:00    |                1 |                 22 |                    3 | Sul                  |               1 | Sul                  |           0 | cheia       |              7 | photo5.jpg     |        4 |        2 |
+|        66 | 2019-07-07  | 13:47:00    |                1 |                 30 |                    5 | Sudoeste             |               3 | Sudeste              |           0 | seca        |              3 | photo6.jpg     |        2 |        3 |
+|        67 | 2019-07-11  | 14:35:00    |                0 |                 37 |                    4 | Norte                |               8 | Leste                |           0 | seca        |              3 | photo7.jpg     |        4 |        1 |
+|        68 | 2019-07-22  | 08:30:00    |                1 |                 29 |                    3 | Sudoeste             |               4 | Sul                  |           1 | seca        |              2 | photo8.jpg     |        1 |        3 |
+|        69 | 2019-07-29  | 14:29:00    |                0 |                 15 |                    9 | Nordeste             |               6 | Sul                  |           1 | cheia       |              8 | photo9.jpg     |        3 |        2 |
+|        70 | 2019-08-04  | 10:02:00    |                0 |                 30 |                   10 | Oeste                |               2 | Leste                |           0 | cheia       |              8 | photo10.jpg    |        5 |        1 |
+|        71 | 2019-08-11  | 05:12:00    |                1 |                 37 |                    4 | Noroeste             |               2 | Sudoeste             |           0 | seca        |              4 | photo11.jpg    |        3 |        5 |
+|        72 | 2019-08-12  | 16:07:00    |                0 |                 25 |                    3 | Sul                  |               2 | Sul                  |           0 | cheia       |             10 | photo12.jpg    |        5 |        6 |
+|        73 | 2019-08-23  | 14:35:00    |                1 |                 29 |                    4 | Norte                |               2 | Leste                |           0 | seca        |              3 | photo13.jpg    |        2 |        3 |
+|        74 | 2019-09-01  | 15:50:00    |                1 |                 22 |                    3 | Sudeste              |               2 | Sul                  |           0 | cheia       |              7 | photo14.jpg    |        5 |        3 |
+|        75 | 2019-09-03  | 07:14:00    |                0 |                 23 |                    1 | Leste                |               1 | Nordeste             |           0 | cheia       |              3 | photo15.jpg    |        1 |        2 |
+|        76 | 2019-09-14  | 09:44:00    |                1 |                 29 |                    5 | Oeste                |               6 | Sul                  |           0 | cheia       |              4 | photo16.jpg    |        3 |        6 |
+|        77 | 2019-09-19  | 06:28:00    |                0 |                 24 |                    5 | Nordeste             |               3 | Sudeste              |           1 | cheia       |              8 | photo17.jpg    |        4 |        1 |
+|        78 | 2019-10-01  | 10:35:00    |                1 |                 37 |                    4 | Norte                |               2 | Leste                |           0 | seca        |              3 | photo18.jpg    |        3 |        5 |
+|        79 | 2019-10-12  | 11:34:00    |                1 |                 28 |                    7 | Sul                  |               6 | Nordeste             |           0 | cheia       |              5 | photo19.jpg    |        4 |        1 |
+|        80 | 2019-10-30  | 09:23:00    |                0 |                 23 |                    1 | Oeste                |               2 | Leste                |           0 | cheia       |              4 | photo20.jpg    |        5 |        3 |
++-----------+-------------+-------------+------------------+--------------------+----------------------+----------------------+-----------------+----------------------+-------------+-------------+----------------+----------------+----------+----------+
+19 rows in set (0.00 sec)
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+SELECT's
+
+1) /*Selecionar ID, temperatura e trânsito dos reports que onde a condição da praia, no dia, for boa ("true")*/
+
+select report_id, report_temperature, report_traffic from report
+where report_condition =  1;
+
++-----------+--------------------+----------------+
+| report_id | report_temperature | report_traffic |
++-----------+--------------------+----------------+
+|        62 |                 23 |              1 |
+|        64 |                 23 |              7 |
+|        65 |                 22 |              7 |
+|        66 |                 30 |              3 |
+|        68 |                 29 |              2 |
+|        71 |                 37 |              4 |
+|        73 |                 29 |              3 |
+|        74 |                 22 |              7 |
+|        76 |                 29 |              4 |
+|        78 |                 37 |              3 |
+|        79 |                 28 |              5 |
++-----------+--------------------+----------------+
+11 rows in set (0.00 sec)
+
+
+
+
+2) *Selecionar ID, data e condição da chuva dos reports do mês de agosto e setembro*/
+
+mysql> select report_id, report_date, report_rain from report
+    -> where report_date between "2019-08-01" and "2019-09-30";
++-----------+-------------+-------------+
+| report_id | report_date | report_rain |
++-----------+-------------+-------------+
+|        70 | 2019-08-04  |           0 |
+|        71 | 2019-08-11  |           0 |
+|        72 | 2019-08-12  |           0 |
+|        73 | 2019-08-23  |           0 |
+|        74 | 2019-09-01  |           0 |
+|        75 | 2019-09-03  |           0 |
+|        76 | 2019-09-14  |           0 |
+|        77 | 2019-09-19  |           1 |
++-----------+-------------+-------------+
+8 rows in set (0.00 sec)
+
+
+
+3)*Selecionar o ID e o nome das praias do Leste que terminam com a letra "e" */
+
+
+select beach_id, beach_name from beach
+    -> where beach_adress = "Leste" and beach_name like "%e%";
++----------+-------------------+
+| beach_id | beach_name        |
++----------+-------------------+
+|        3 | Lagoinha do Leste |
+|        6 | Campeche          |
++----------+-------------------+
+2 rows in set (0.00 sec)
+
+
+
+
+4) /*Selecionar nome das praias que tem salva-vidas*/
+
+
+mysql> select beach_name, element_description
+    -> from beach, element
+    -> where beach.element_id = element.element_id
+    -> and beach.element_id = 1;
++------------+---------------------+
+| beach_name | element_description |
++------------+---------------------+
+| Joaquina   | estacionamento      |
++------------+---------------------+
+1 row in set (0.00 sec)
+
+
+
+5)mysql> /*Selecionar data e nome das praias do Norte dos reports sem chuva*/
+mysql> select report_date, report_rain, beach_name, beach_adress
+    -> from report, beach
+    -> where report.beach_id = report.beach_id
+    -> and beach_adress = "Norte"
+    -> and report_rain = 0;
++-------------+-------------+-------------+--------------+
+| report_date | report_rain | beach_name  | beach_adress |
++-------------+-------------+-------------+--------------+
+| 2019-06-20  |           0 | Canasvieira | Norte        |
+| 2019-06-30  |           0 | Canasvieira | Norte        |
+| 2019-07-02  |           0 | Canasvieira | Norte        |
+| 2019-07-07  |           0 | Canasvieira | Norte        |
+| 2019-07-11  |           0 | Canasvieira | Norte        |
+| 2019-08-04  |           0 | Canasvieira | Norte        |
+| 2019-08-11  |           0 | Canasvieira | Norte        |
+| 2019-08-12  |           0 | Canasvieira | Norte        |
+| 2019-08-23  |           0 | Canasvieira | Norte        |
+| 2019-09-01  |           0 | Canasvieira | Norte        |
+| 2019-09-03  |           0 | Canasvieira | Norte        |
+| 2019-09-14  |           0 | Canasvieira | Norte        |
+| 2019-10-01  |           0 | Canasvieira | Norte        |
+| 2019-10-12  |           0 | Canasvieira | Norte        |
+| 2019-10-30  |           0 | Canasvieira | Norte        |
+| 2019-06-20  |           0 | Ingleses    | Norte        |
+| 2019-06-30  |           0 | Ingleses    | Norte        |
+| 2019-07-02  |           0 | Ingleses    | Norte        |
+| 2019-07-07  |           0 | Ingleses    | Norte        |
+| 2019-07-11  |           0 | Ingleses    | Norte        |
+| 2019-08-04  |           0 | Ingleses    | Norte        |
+| 2019-08-11  |           0 | Ingleses    | Norte        |
+| 2019-08-12  |           0 | Ingleses    | Norte        |
+| 2019-08-23  |           0 | Ingleses    | Norte        |
+| 2019-09-01  |           0 | Ingleses    | Norte        |
+| 2019-09-03  |           0 | Ingleses    | Norte        |
+| 2019-09-14  |           0 | Ingleses    | Norte        |
+| 2019-10-01  |           0 | Ingleses    | Norte        |
+| 2019-10-12  |           0 | Ingleses    | Norte        |
+| 2019-10-30  |           0 | Ingleses    | Norte        |
++-------------+-------------+-------------+--------------+
+30 rows in set (0.00 sec)
