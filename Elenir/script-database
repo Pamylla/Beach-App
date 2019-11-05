@@ -126,6 +126,7 @@ VALUES
 (null, "2019-10-12", "11:34", true, 28, 7, "Sul", 6, "Nordeste", false, "cheia", 5, "photo19.jpg", 4, 1),
 (null, "2019-10-30", "09:23", false, 23, 1, "Oeste", 2, "Leste", false, "cheia", 4, "photo20.jpg", 5, 4);
 
+
 UPDATE report
 SET report_picture = "photo111111.jpg"
 WHERE report_picture = "photo1.jpg";
