@@ -135,31 +135,6 @@ where report_date  = "2019-05-01";
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*Selecionar ID, temperatura e trânsito dos reports que a condição da praia no dia for boa ("true")*/
 
 select report_id, report_temperature, report_traffic from report
@@ -178,25 +153,18 @@ select beach_id, beach_name from beach
 where beach_adress = "Leste" and beach_name like "%e%";
 
 
-/*Selecionar nome das praias que tem salva-vidas e estacionamento*/
+/*Selecionar nome das praias que tem salva-vidas*/
 
-select beach_name 
+select beach_name, element_description 
 from beach, element
-where element_id 
+where beach.element_id = element.element_id
+and beach.element_id = 1;
 
 
+/*Selecionar data e nome das praias do Sul dos reports sem chuva*/
 
-
-
-.
-.
-.
-
-
- select vendas.nomeven,
-    -> produto.descpro,
-    -> categoria.codcat
-    -> from vendas, produto, categoria
-    -> where vendas.codpro = produto.codpro and
-    -> vendas.codcat = categoria.codcat;
-
+select report_date, report_rain, beach_name, beach_adress
+from report, beach
+where report.beach_id = report.beach_id
+and beach_adress = "Norte"
+and report_rain = 0;
